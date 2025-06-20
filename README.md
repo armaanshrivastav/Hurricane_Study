@@ -167,9 +167,109 @@ After cloning the repository, navigate into the newly created `Hurricane_Study` 
 
 ---
 
-**What Happens Next?**
+### 📦 Step 4: Install Python Dependencies
 
 Now that you have cloned the project and activated its dedicated virtual environment, you are ready to install any project-specific Python dependencies. Look for a `requirements.txt` file within the `Hurricane_Study` directory. If it exists, you'll typically run:
 
 ```bash
 pip install -r requirements.txt
+
+---
+
+### 📊 Step 5: Download and Prepare Project Data
+
+This project requires external data from Google Drive. Follow these steps to download it and place it correctly for processing.
+
+1.  **Download the Data from Google Drive:**
+    * Access the Google Drive link: https://drive.google.com/drive/folders/1-0gmto35N7WkK2AC-FP9s8Qhs_o4Aigc?usp=sharing
+    * Download the entire dataset. It will likely be a zipped file (e.g., `HurricaneData.zip`).
+    * Save this downloaded file to a temporary location on your computer (e.g., your Downloads folder).
+
+2.  **Create the Data Folder:**
+    * Navigate back to your `Hurricane_Study` project directory in your terminal (if you're not already there):
+        ```bash
+        cd /path/to/MyHurricaneProjects/Hurricane_Study
+        ```
+        (Replace `/path/to/MyHurricaneProjects` with the actual path to your top-level folder).
+    * Create a new folder specifically for the raw data:
+        ```bash
+        mkdir HurricaneCompleteData
+        ```
+        This creates `Hurricane_Study/HurricaneCompleteData/`.
+
+3.  **Extract Data into the Folder:**
+    * **Unzip** the downloaded data file (`HurricaneData.zip` or similar). This will typically create a folder containing the actual data files.
+    * **Move** the *contents* of the unzipped folder into the `HurricaneCompleteData` folder you just created.
+        * **Example (Conceptual):** If unzipping `HurricaneData.zip` creates a folder `unzipped_data_contents`, you would move everything from `unzipped_data_contents/*` to `Hurricane_Study/HurricaneCompleteData/`.
+        * **Verify:** After moving, the `HurricaneCompleteData` folder should directly contain the raw data files or subfolders, not another single folder with the same name.
+
+4.  **Run the Data Transformation Script:**
+    * **Ensure your `hurricane-env` virtual environment is still active.**
+    * Execute the `transformData.py` script, which will process the raw data.
+        ```bash
+        python transformData.py
+        ```
+    * Monitor the terminal for any output or errors from the script.
+
+---
+
+### ▶️ Step 6: Run the Common Utilities Script (`common.py`)
+
+After the data has been transformed, the `common.py` script needs to be executed to set up common utilities or perform further essential processing for the project.
+
+1.  **Ensure your `hurricane-env` virtual environment is still active.**
+2.  **Ensure you are in the `Hurricane_Study` directory.**
+3.  **Run the `common.py` script:**
+    ```bash
+    python common.py
+    ```
+    * Pay attention to any output or prompts in the terminal during its execution.
+
+---
+
+### 🌐 Step 7: View the Generated Graphs (Local Server)
+
+The `common.py` script generates a `graph` folder, which is then zipped. To view the contents (likely HTML files or similar visualizations), you'll need to unzip it and serve it using a simple Python web server.
+
+1.  **Locate and Unzip the `graph` Folder:**
+    * After `common.py` runs, you should find a zipped file (e.g., `graph.zip` or similar) within your `Hurricane_Study` directory, or wherever `common.py` is configured to output it.
+    * **Unzip this file** in **any location** on your system where you want to serve the content from. This will create a folder named `graph` (or similar) containing HTML files, images, etc.
+    * **Remember the exact path** to this unzipped `graph` folder.
+
+2.  **Navigate to the Unzipped `graph` Folder in Command Prompt:**
+    * Open a **new** terminal or command prompt window.
+    * Use the `cd` command to go into the *unzipped `graph` folder*.
+        * **Example:** If you unzipped it to `C:\Users\YourUsername\Documents\MyGraphs`:
+            ```cmd
+            cd C:\Users\YourUsername\Documents\MyGraphs
+            ```
+        * **Example:** If you unzipped it to `~/Desktop/HurricaneGraphs`:
+            ```bash
+            cd ~/Desktop/HurricaneGraphs
+            ```
+    * **It is crucial that you are *inside* this `graph` folder** when you run the next command.
+
+3.  **Run the Python HTTP Server:**
+    * With your terminal/command prompt inside the unzipped `graph` folder, run the following command to start a simple local web server:
+        ```bash
+        python -m http.server
+        ```
+        * You should see output like `Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...` This means the server is running.
+        * **Keep this terminal window open** as long as you want the server to run.
+
+4.  **Open the Graphs in Your Browser:**
+    * Open your web browser (Chrome, Firefox, Edge, Safari, etc.).
+    * In the address bar, type the following URL and press Enter:
+        ```
+        http://localhost:8000/root.html
+        ```
+        
+    * This should open the main page of your generated graphs.
+
+---
+
+**Final Notes:**
+
+* Ensure all Python scripts (`transformData.py`, `common.py`) complete successfully without errors before proceeding to the next steps.
+* The `python -m http.server` command serves files from the directory where it's executed. Make sure you are in the *unzipped `graph` folder* for it to work correctly.
+* To stop the local web server, go back to the terminal window where it's running and press `Ctrl + C` (Command + C on macOS).
