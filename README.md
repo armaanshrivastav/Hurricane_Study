@@ -106,7 +106,7 @@ Now that you have your empty folder, you will open your terminal or command prom
         (Remember to replace `YourUsername` with your actual Windows username).
 3.  Once inside your new folder, execute the following command to clone the repository:
     ```bash
-    git clone [https://github.com/armaanshrivastav/Hurricane_Study.git](https://github.com/armaanshrivastav/Hurricane_Study.git)
+    git clone https://github.com/armaanshrivastav/Hurricane_Study.git
     ```
 
 #### 🐧 macOS / 🖥️ Linux
@@ -119,7 +119,7 @@ Now that you have your empty folder, you will open your terminal or command prom
         ```
 3.  Once inside your new folder, execute the following command to clone the repository:
     ```bash
-    git clone [https://github.com/armaanshrivastav/Hurricane_Study.git](https://github.com/armaanshrivastav/Hurricane_Study.git)
+    git clone https://github.com/armaanshrivastav/Hurricane_Study.git
     ```
 
 ---
