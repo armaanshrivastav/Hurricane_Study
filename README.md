@@ -129,7 +129,7 @@ Now that you have your empty folder, you will open your terminal or command prom
         (Remember to replace `YourUsername` with your actual Windows username).
 3.  Once inside your new folder, execute the following command to clone the repository. **Replace `<YOUR_PERSONAL_ACCESS_TOKEN>` with the actual token you generated in Step 0.5.**
     ```bash
-    git clone https://<YOUR_PERSONAL_ACCESS_TOKEN>@[github.com/armaanshrivastav/Hurricane_Study.git
+    git clone https://<YOUR_PERSONAL_ACCESS_TOKEN>@github.com/armaanshrivastav/Hurricane_Study.git
     ```
     *Note: You will not be prompted for a username or password when using this method, as the token is directly provided in the URL.*
 
