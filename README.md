@@ -146,7 +146,7 @@ After cloning the repository, navigate into the newly created `Hurricane_Study` 
 
 2.  **Create the virtual environment:**
     ```bash
-    python3 -m venv hurricane-env
+    python -m venv hurricane-env
     ```
     This command creates a new folder named `hurricane-env` inside your `Hurricane_Study` directory, containing a private copy of the Python interpreter and associated files.
 
