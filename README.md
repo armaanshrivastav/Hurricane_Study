@@ -21,8 +21,7 @@ Git is essential for cloning the project repository.
     If you see a version number (e.g., `git version 2.30.0`), Git is installed. Otherwise, proceed with the installation below.
 
 * **Install Git:**
-    * **Windows:** Download the installer from the official Git website: 
-        [Git for Windows](https://git-scm.com/download/win)
+    * **Windows:** Download the installer from the official Git website: [Git for Windows](https://git-scm.com/download/win)
         Follow the setup wizard. The default options are usually fine.
     * **macOS:**
         * **Recommended (Homebrew):** If you have Homebrew installed, open your terminal and run:
@@ -54,7 +53,7 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
     ```
     If you see a version number like `Python 3.9.7`, you're good to go. If you see `Python 2.x.x` or an error, you need to install Python 3.
 
-* **Install Python 3+:** 
+* **Install Python 3+:**
     * **Windows/macOS:** Download the appropriate installer from the official Python website:
         [Python Downloads](https://www.python.org/downloads/)
         * **Important for Windows:** During installation, make sure to check the box that says "**Add Python X.Y to PATH**" (where X.Y is the version number). This makes it easier to run Python from the command line.
@@ -65,6 +64,26 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
         # Or for Fedora:
         sudo dnf install python3
         ```
+
+### 🔑 Step 0.5: Generate a GitHub Personal Access Token (PAT)
+
+**IMPORTANT:** GitHub no longer accepts account passwords for Git operations over HTTPS. You must use a Personal Access Token (PAT) instead, especially for private repositories or if you have 2-Factor Authentication (2FA) enabled.
+
+**SECURITY WARNING:** Embedding your PAT directly in the clone URL (as shown in Step 2) is generally **NOT RECOMMENDED** for long-term or shared use. It exposes your token in your shell history and potentially other logs, which is a security risk. For better security, consider using a Git credential helper (refer to Git documentation). This method is provided for specific scenarios where direct URL embedding is preferred despite the risks.
+
+1.  **Log in to GitHub:** Go to [github.com](https://github.com/) and log in to your account in your web browser.
+2.  **Navigate to Developer Settings:**
+    * Click your **profile picture** in the top-right corner.
+    * Select **Settings**.
+    * In the left sidebar, scroll down and click **Developer settings**.
+    * Click **Personal access tokens** and then select **Tokens (classic)**.
+3.  **Generate a New Token:**
+    * Click the **"Generate new token"** button.
+    * **Note:** Give your token a descriptive name (e.g., `Hurricane Study Project Access`).
+    * **Expiration:** Choose an expiration date. For security, it's recommended to set an expiration (e.g., 90 days, 1 year) rather than "No expiration".
+    * **Scopes:** Select the necessary permissions (scopes). For cloning public and private repositories, select at least `repo` (which grants full control of private repositories). You might only need `public_repo` if you are sure you will *only* interact with public repositories.
+    * Click **"Generate token"** at the bottom of the page.
+4.  **Copy the Token:** **Crucially, copy the generated token immediately!** This is the **ONLY TIME** you will see the token. Store it securely (e.g., in a password manager).
 
 ---
 
@@ -91,36 +110,28 @@ First, you need to create a new, empty folder on your system where you want to s
     ```
     (You can replace `MyHurricaneProjects` with your preferred folder name).
 
-### ⬇️ Step 2: Navigate to the New Folder and Clone the Repository
+### ⬇️ Step 2: Navigate to the New Folder and Clone the Repository using PAT in URL
 
-Now that you have your empty folder, you will open your terminal or command prompt, navigate into this new folder, and then use `git clone` to download the project files.
+Now that you have your empty folder, you will open your terminal or command prompt, navigate into this new folder, and then use `git clone` to download the project files. This time, you will embed your Personal Access Token directly in the URL.
 
-#### 💻 Windows
+#### 💻 Windows / 🐧 macOS / 🖥️ Linux
 
-1.  Open **Command Prompt** or **PowerShell**.
-2.  Use the `cd` command to navigate into the folder you just created.
-    * **Example (if on Desktop):**
+1.  Open your **Terminal** or **Command Prompt** / **PowerShell**.
+2.  Use the `cd` command to navigate into the folder you created in Step 1.
+    * **Example (if on Desktop, Linux/macOS):**
+        ```bash
+        cd ~/Desktop/MyHurricaneProjects
+        ```
+    * **Example (if on Desktop, Windows):**
         ```cmd
         cd C:\Users\YourUsername\Desktop\MyHurricaneProjects
         ```
         (Remember to replace `YourUsername` with your actual Windows username).
-3.  Once inside your new folder, execute the following command to clone the repository:
+3.  Once inside your new folder, execute the following command to clone the repository. **Replace `<YOUR_PERSONAL_ACCESS_TOKEN>` with the actual token you generated in Step 0.5.**
     ```bash
-    git clone https://github.com/armaanshrivastav/Hurricane_Study.git
+    git clone https://<YOUR_PERSONAL_ACCESS_TOKEN>@[github.com/armaanshrivastav/Hurricane_Study.git
     ```
-
-#### 🐧 macOS / 🖥️ Linux
-
-1.  Open your **Terminal** application.
-2.  Use the `cd` command to navigate into the folder you created in Step 1.
-    * **Example (if on Desktop):**
-        ```bash
-        cd ~/Desktop/MyHurricaneProjects
-        ```
-3.  Once inside your new folder, execute the following command to clone the repository:
-    ```bash
-    git clone https://github.com/armaanshrivastav/Hurricane_Study.git
-    ```
+    *Note: You will not be prompted for a username or password when using this method, as the token is directly provided in the URL.*
 
 ---
 
@@ -152,7 +163,7 @@ After cloning the repository, navigate into the newly created `Hurricane_Study` 
         ```powershell
         .\hurricane-env\Scripts\Activate.ps1
         ```
-    Once activated, your terminal prompt will usually show `(hurricane-env)` at the beginning, indicating that you are now working within this isolated environment. 
+    Once activated, your terminal prompt will usually show `(hurricane-env)` at the beginning, indicating that you are now working within this isolated environment.
 
 ---
 
