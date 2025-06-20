@@ -173,10 +173,10 @@ Now that you have cloned the project and activated its dedicated virtual environ
 
 ```bash
 pip install -r requirements.txt
+```
 
----
 
-**### 📊 Step 5: Download and Prepare Project Data**
+### 📊 Step 5: Download and Prepare Project Data
 
 This project requires external data from Google Drive. Follow these steps to download it and place it correctly for processing.
 
@@ -211,7 +211,7 @@ This project requires external data from Google Drive. Follow these steps to dow
         ```
     * Monitor the terminal for any output or errors from the script.
 
----
+```
 
 ### ▶️ Step 6: Run the Common Utilities Script (`common.py`)
 
@@ -225,7 +225,7 @@ After the data has been transformed, the `common.py` script needs to be executed
     ```
     * Pay attention to any output or prompts in the terminal during its execution.
 
----
+```
 
 ### 🌐 Step 7: View the Generated Graphs (Local Server)
 
