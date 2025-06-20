@@ -10,7 +10,7 @@ Follow these simple steps to get a local copy of the project up and running on y
 
 Before you begin, ensure you have **Git** and **Python 3+** installed on your system.
 
-#### Git Installation
+#### Git Installation 
 
 Git is essential for cloning the project repository.
 
