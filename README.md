@@ -10,7 +10,7 @@ Follow these simple steps to get a local copy of the project up and running on y
 
 Before you begin, ensure you have **Git** and **Python 3+** installed on your system.
 
-#### Git Installation
+#### Git Installation 
 
 Git is essential for cloning the project repository.
 
@@ -21,8 +21,7 @@ Git is essential for cloning the project repository.
     If you see a version number (e.g., `git version 2.30.0`), Git is installed. Otherwise, proceed with the installation below.
 
 * **Install Git:**
-    * **Windows:** Download the installer from the official Git website: 
-        [Git for Windows](https://git-scm.com/download/win)
+    * **Windows:** Download the installer from the official Git website: [Git for Windows](https://git-scm.com/download/win)
         Follow the setup wizard. The default options are usually fine.
     * **macOS:**
         * **Recommended (Homebrew):** If you have Homebrew installed, open your terminal and run:
@@ -54,7 +53,7 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
     ```
     If you see a version number like `Python 3.9.7`, you're good to go. If you see `Python 2.x.x` or an error, you need to install Python 3.
 
-* **Install Python 3+:** 
+* **Install Python 3+:**
     * **Windows/macOS:** Download the appropriate installer from the official Python website:
         [Python Downloads](https://www.python.org/downloads/)
         * **Important for Windows:** During installation, make sure to check the box that says "**Add Python X.Y to PATH**" (where X.Y is the version number). This makes it easier to run Python from the command line.
@@ -65,6 +64,26 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
         # Or for Fedora:
         sudo dnf install python3
         ```
+
+### 🔑 Step 0.5: Generate a GitHub Personal Access Token (PAT)
+
+**IMPORTANT:** GitHub no longer accepts account passwords for Git operations over HTTPS. You must use a Personal Access Token (PAT) instead, especially for private repositories or if you have 2-Factor Authentication (2FA) enabled.
+
+**SECURITY WARNING:** Embedding your PAT directly in the clone URL (as shown in Step 2) is generally **NOT RECOMMENDED** for long-term or shared use. It exposes your token in your shell history and potentially other logs, which is a security risk. For better security, consider using a Git credential helper (refer to Git documentation). This method is provided for specific scenarios where direct URL embedding is preferred despite the risks.
+
+1.  **Log in to GitHub:** Go to [github.com](https://github.com/) and log in to your account in your web browser.
+2.  **Navigate to Developer Settings:**
+    * Click your **profile picture** in the top-right corner.
+    * Select **Settings**.
+    * In the left sidebar, scroll down and click **Developer settings**.
+    * Click **Personal access tokens** and then select **Tokens (classic)**.
+3.  **Generate a New Token:**
+    * Click the **"Generate new token"** button.
+    * **Note:** Give your token a descriptive name (e.g., `Hurricane Study Project Access`).
+    * **Expiration:** Choose an expiration date. For security, it's recommended to set an expiration (e.g., 90 days, 1 year) rather than "No expiration".
+    * **Scopes:** Select the necessary permissions (scopes). For cloning public and private repositories, select at least `repo` (which grants full control of private repositories). You might only need `public_repo` if you are sure you will *only* interact with public repositories.
+    * Click **"Generate token"** at the bottom of the page.
+4.  **Copy the Token:** **Crucially, copy the generated token immediately!** This is the **ONLY TIME** you will see the token. Store it securely (e.g., in a password manager).
 
 ---
 
@@ -91,36 +110,28 @@ First, you need to create a new, empty folder on your system where you want to s
     ```
     (You can replace `MyHurricaneProjects` with your preferred folder name).
 
-### ⬇️ Step 2: Navigate to the New Folder and Clone the Repository
+### ⬇️ Step 2: Navigate to the New Folder and Clone the Repository using PAT in URL
 
-Now that you have your empty folder, you will open your terminal or command prompt, navigate into this new folder, and then use `git clone` to download the project files.
+Now that you have your empty folder, you will open your terminal or command prompt, navigate into this new folder, and then use `git clone` to download the project files. This time, you will embed your Personal Access Token directly in the URL.
 
-#### 💻 Windows
+#### 💻 Windows / 🐧 macOS / 🖥️ Linux
 
-1.  Open **Command Prompt** or **PowerShell**.
-2.  Use the `cd` command to navigate into the folder you just created.
-    * **Example (if on Desktop):**
+1.  Open your **Terminal** or **Command Prompt** / **PowerShell**.
+2.  Use the `cd` command to navigate into the folder you created in Step 1.
+    * **Example (if on Desktop, Linux/macOS):**
+        ```bash
+        cd ~/Desktop/MyHurricaneProjects
+        ```
+    * **Example (if on Desktop, Windows):**
         ```cmd
         cd C:\Users\YourUsername\Desktop\MyHurricaneProjects
         ```
         (Remember to replace `YourUsername` with your actual Windows username).
-3.  Once inside your new folder, execute the following command to clone the repository:
+3.  Once inside your new folder, execute the following command to clone the repository. **Replace `<YOUR_PERSONAL_ACCESS_TOKEN>` with the actual token you generated in Step 0.5.**
     ```bash
-    git clone [https://github.com/armaanshrivastav/Hurricane_Study.git](https://github.com/armaanshrivastav/Hurricane_Study.git)
+    git clone https://<YOUR_PERSONAL_ACCESS_TOKEN>@github.com/armaanshrivastav/Hurricane_Study.git
     ```
-
-#### 🐧 macOS / 🖥️ Linux
-
-1.  Open your **Terminal** application.
-2.  Use the `cd` command to navigate into the folder you created in Step 1.
-    * **Example (if on Desktop):**
-        ```bash
-        cd ~/Desktop/MyHurricaneProjects
-        ```
-3.  Once inside your new folder, execute the following command to clone the repository:
-    ```bash
-    git clone [https://github.com/armaanshrivastav/Hurricane_Study.git](https://github.com/armaanshrivastav/Hurricane_Study.git)
-    ```
+    *Note: You will not be prompted for a username or password when using this method, as the token is directly provided in the URL.*
 
 ---
 
@@ -135,7 +146,7 @@ After cloning the repository, navigate into the newly created `Hurricane_Study` 
 
 2.  **Create the virtual environment:**
     ```bash
-    python3 -m venv hurricane-env
+    python -m venv hurricane-env
     ```
     This command creates a new folder named `hurricane-env` inside your `Hurricane_Study` directory, containing a private copy of the Python interpreter and associated files.
 
@@ -152,13 +163,114 @@ After cloning the repository, navigate into the newly created `Hurricane_Study` 
         ```powershell
         .\hurricane-env\Scripts\Activate.ps1
         ```
-    Once activated, your terminal prompt will usually show `(hurricane-env)` at the beginning, indicating that you are now working within this isolated environment. 
+    Once activated, your terminal prompt will usually show `(hurricane-env)` at the beginning, indicating that you are now working within this isolated environment.
 
 ---
 
-**What Happens Next?**
+### 📦 Step 4: Install Python Dependencies
 
 Now that you have cloned the project and activated its dedicated virtual environment, you are ready to install any project-specific Python dependencies. Look for a `requirements.txt` file within the `Hurricane_Study` directory. If it exists, you'll typically run:
 
 ```bash
 pip install -r requirements.txt
+```
+
+
+### 📊 Step 5: Download and Prepare Project Data
+
+This project requires external data from Google Drive. Follow these steps to download it and place it correctly for processing.
+
+1.  **Download the Data from Google Drive:**
+    * Access the Google Drive link: https://drive.google.com/drive/folders/1-0gmto35N7WkK2AC-FP9s8Qhs_o4Aigc?usp=sharing
+    * Download the entire dataset. It will likely be a zipped file (e.g., `HurricaneData.zip`).
+    * Save this downloaded file to a temporary location on your computer (e.g., your Downloads folder).
+
+2.  **Create the Data Folder:**
+    * Navigate back to your `Hurricane_Study` project directory in your terminal (if you're not already there):
+        ```bash
+        cd /path/to/MyHurricaneProjects/Hurricane_Study
+        ```
+        (Replace `/path/to/MyHurricaneProjects` with the actual path to your top-level folder).
+    * Create a new folder specifically for the raw data:
+        ```bash
+        mkdir HurricaneCompleteData
+        ```
+        This creates `Hurricane_Study/HurricaneCompleteData/`.
+
+3.  **Extract Data into the Folder:**
+    * **Unzip** the downloaded data file (`HurricaneData.zip` or similar). This will typically create a folder containing the actual data files.
+    * **Move** the *contents* of the unzipped folder into the `HurricaneCompleteData` folder you just created.
+        * **Example (Conceptual):** If unzipping `HurricaneData.zip` creates a folder `unzipped_data_contents`, you would move everything from `unzipped_data_contents/*` to `Hurricane_Study/HurricaneCompleteData/`.
+        * **Verify:** After moving, the `HurricaneCompleteData` folder should directly contain the raw data files or subfolders, not another single folder with the same name.
+
+4.  **Run the Data Transformation Script:**
+    * **Ensure your `hurricane-env` virtual environment is still active.**
+    * Execute the `transformData.py` script, which will process the raw data.
+        ```bash
+        python transformData.py
+        ```
+    * Monitor the terminal for any output or errors from the script.
+    * If you experience any issues, please contact Armaan Shrivastav for assistance.
+
+---
+
+### ▶️ Step 6: Run the Common Utilities Script (`common.py`)
+
+After the data has been transformed, the `common.py` script needs to be executed to set up common utilities or perform further essential processing for the project.
+
+1.  **Ensure your `hurricane-env` virtual environment is still active.**
+2.  **Ensure you are in the `Hurricane_Study` directory.**
+3.  **Run the `common.py` script:**
+    ```bash
+    python common.py
+    ```
+    * Pay attention to any output or prompts in the terminal during its execution.
+    * If you experience any issues, please contact Armaan Shrivastav for assistance.
+
+---
+
+### 🌐 Step 7: View the Generated Graphs (Local Server)
+
+The `common.py` script directly generates a `graph` folder containing the visualization files. To view these (likely HTML files or similar), you'll need to serve them using a simple Python web server.
+
+1.  **Locate the `graph` Folder:**
+    * After `common.py` runs, you should find a new folder named `graph` within your `Hurricane_Study` directory.
+    * **Remember the exact path** to this `graph` folder.
+
+2.  **Navigate to the `graph` Folder in Command Prompt:**
+    * Open a **new** terminal or command prompt window.
+    * Use the `cd` command to go into the *`graph` folder*.
+        * **Example:** If your `Hurricane_Study` project is at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study`, then the `graph` folder would likely be at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graph`.
+            ```cmd
+            cd C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graph
+            ```
+        * **Example (Linux/macOS):** If your `Hurricane_Study` project is at `~/Desktop/MyHurricaneProjects/Hurricane_Study`, then the `graph` folder would likely be at `~/Desktop/MyHurricaneProjects/Hurricane_Study/graph`.
+            ```bash
+            cd ~/Desktop/MyHurricaneProjects/Hurricane_Study/graph
+            ```
+    * **It is crucial that you are *inside* this `graph` folder** when you run the next command.
+
+3.  **Run the Python HTTP Server:**
+    * With your terminal/command prompt inside the `graph` folder, run the following command to start a simple local web server:
+        ```bash
+        python -m http.server
+        ```
+        * You should see output like `Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...` This means the server is running.
+        * **Keep this terminal window open** as long as you want the server to run.
+
+4.  **Open the Graphs in Your Browser:**
+    * Open your web browser (Chrome, Firefox, Edge, Safari, etc.).
+    * In the address bar, type the following URL and press Enter:
+        ```
+        http://localhost:8000/root.html
+        ```
+        
+    * This should open the main page of your generated graphs.
+
+---
+
+**Final Notes:**
+
+* Ensure all Python scripts (`transformData.py`, `common.py`) complete successfully without errors before proceeding to the next steps.
+* The `python -m http.server` command serves files from the directory where it's executed. Make sure you are in the *unzipped `graph` folder* for it to work correctly.
+* To stop the local web server, go back to the terminal window where it's running and press `Ctrl + C` (Command + C on macOS).
