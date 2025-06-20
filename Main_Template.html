@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synchronized 3D Plots</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        
+        /* Header styling */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .mean-rh-label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            background-color: #eaf2f8;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 8px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+        /* Full-screen overlay with fade effect */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: 1000;
+            text-align: center;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center spinner and progress bar */
+        #spinner-container {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Spinner styles */
+        .spinner {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Progress bar */
+        #progress-bar {
+            width: 60%;
+            margin: 20px auto;
+            background-color: #ccc;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #progress-bar-inner {
+            height: 20px;
+            width: 0%;
+            background-color: #3498db;
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+
+
+
+
+<body
+<!-- Updated Header Section -->
+<div class="header-container">
+    <button onclick="window.location.href='../root.html'">Back to Main Menu</button>
+    <div class="mean-rh-label">Mean RH = {MeanRH} %</div>
+    <button onclick="downloadPDF()">Download All Graphs as PDF</button>
+</div>
+
+<!-- Overlay (unchanged) -->
+<div id="overlay">
+    <div id="spinner-container">
+        <div class="spinner"></div>
+        <div id="progress-bar">
+            <div id="progress-bar-inner"></div>
+        </div>
+        <p>Generating your PDF, please wait...</p>
+    </div>
+</div>
+</div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <iframe src="radial_velocity.html" id="plot1" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="tangential_velocity.html" id="plot2" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="vertical_velocity.html" id="plot4" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="wind_speed.html" id="plot6" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="theta_e.html" id="plot3" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="trajectory.html" id="plot5" style="width: 100%; height: 550px;"></iframe>
+       <!-- <iframe src="altitude_wind_speed.html" id="plot7" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="altitude_theta_e.html" id="plot8" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="altitude_radial_velocity.html" id="plot9" style="width: 100%; height: 550px;"></iframe>
+        <iframe src="altitude_vertical_velocity.html" id="plot10" style="width: 100%; height: 550px;"></iframe>-->
+
+        
+
+    </div>
+
+    <script>
+        // Synchronize Plotly events between all the iframes
+        const iframes = [
+            document.getElementById('plot1'),
+            document.getElementById('plot2'),
+            document.getElementById('plot3'),
+            document.getElementById('plot4'),
+            document.getElementById('plot5'),
+            document.getElementById('plot6')
+        ];
+
+        // Throttling function to limit how often the events are propagated
+        function throttle(func, delay) {
+            let lastTime = 0;
+            return function(...args) {
+                const now = new Date().getTime();
+                if (now - lastTime >= delay) {
+                    lastTime = now;
+                    func(...args);
+                }
+            };
+        }
+
+        // Function to sync Plotly events
+        const syncPlotlyEvents = (iframe, index) => {
+            iframe.onload = () => {
+                const plotWindow = iframe.contentWindow;
+
+                // Ensure Plotly is loaded in the iframe
+                if (plotWindow.Plotly) {
+                    const plotDiv = plotWindow.document.querySelector('.plotly-graph-div');
+                    if (plotDiv) {
+                        // Throttled event listener
+                        const throttledRelayout = throttle((eventData) => {
+                            // Loop through all iframes to sync the plot layout
+                            iframes.forEach((otherIframe, otherIndex) => {
+                                if (index !== otherIndex) {
+                                    const otherPlotWindow = otherIframe.contentWindow;
+                                    const otherPlotDiv = otherPlotWindow.document.querySelector('.plotly-graph-div');
+                                    if (otherPlotDiv) {
+                                        otherPlotWindow.Plotly.relayout(otherPlotDiv, eventData);
+                                    }
+                                }
+                            });
+                        }, 200);  // 200ms delay for throttling
+
+                        plotDiv.on('plotly_relayout', throttledRelayout);
+                    }
+                }
+            };
+        };
+
+        // Apply the synchronization function to each iframe
+        iframes.forEach((iframe, index) => {
+            syncPlotlyEvents(iframe, index);
+        });
+
+        async function downloadPDF() {
+            const { jsPDF } = window.jspdf; // Initialize jsPDF
+            const pdf = new jsPDF({ orientation: 'landscape' }); // Create a landscape PDF
+            const iframes = [
+                document.getElementById('plot1'),
+                document.getElementById('plot2'),
+                document.getElementById('plot4'),
+                document.getElementById('plot6'),
+                document.getElementById('plot3'),
+                document.getElementById('plot5')
+            ];
+
+            const graphsPerPage = 6; // Number of graphs per page
+            const imageWidth = 85; // Width of each image
+            const imageHeight = 80; // Height of each image
+            const xPositions = [10, 100, 190]; // X positions for three columns
+            const yPositions = [10, 100]; // Y positions for two rows
+            let graphIndex = 0; // Index for tracking graphs on the page
+
+            // Get the HTML file name from the current URL
+            
+
+            // Get the relevant folder name (e.g., "earl") from the URL
+            const folderName = window.location.pathname.split('/')[1];
+
+            // Generate a timestamp
+            const now = new Date();
+            const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`;
+
+            // Combine the folder name and timestamp for the PDF filename
+            const pdfFileName = `${folderName}_${timestamp}.pdf`;
+            // Show overlay and reset progress bar
+            const overlay = document.getElementById('overlay');
+            const progressBarInner = document.getElementById('progress-bar-inner');
+            overlay.style.display = 'block';
+            progressBarInner.style.width = '0%';
+
+            for (let i = 0; i < iframes.length; i++) {
+                const iframe = iframes[i];
+                const plotWindow = iframe.contentWindow;
+                const plotDiv = plotWindow.document.querySelector('.plotly-graph-div');
+
+                if (plotDiv && plotWindow.Plotly) {
+                    // Use Plotly's toImage to export the graph as a data URL
+                    const imageURL = await plotWindow.Plotly.toImage(plotDiv, { format: 'png', width: 800, height: 600 });
+
+                    // Calculate positions for the current graph
+                    const x = xPositions[graphIndex % 3]; // Alternate between three columns
+                    const y = yPositions[Math.floor(graphIndex / 3)]; // Alternate between two rows
+
+                    // Draw a border around the image
+                    pdf.setLineWidth(0.5);
+                    pdf.setDrawColor(0, 0, 0); // Black border
+                    pdf.rect(x - 5, y - 5, imageWidth + 10, imageHeight + 10); // Border dimensions around image
+
+                    // Add the image to the PDF
+                    pdf.addImage(imageURL, 'PNG', x, y, imageWidth, imageHeight);
+
+                    graphIndex++;
+
+                    // Add a new page if we've placed 6 graphs on the current page
+                    if (graphIndex % graphsPerPage === 0 && i < iframes.length - 1) {
+                        pdf.addPage(); // Add a new page
+                        graphIndex = 0; // Reset for the next page
+                    }
+                }
+
+                // Update progress bar
+                const progress = ((i + 1) / iframes.length) * 100;
+                progressBarInner.style.width = `${progress}%`;
+            }
+
+            // Hide overlay and save the PDF
+            overlay.style.display = 'none';
+            pdf.save(pdfFileName);
+        }
+    </script>
+</body>
+</html>
