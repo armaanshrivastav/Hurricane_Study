@@ -210,6 +210,7 @@ This project requires external data from Google Drive. Follow these steps to dow
         python transformData.py
         ```
     * Monitor the terminal for any output or errors from the script.
+    * If you experience any issues, please contact Armaan Shrivastav for assistance.
 
 ---
 
@@ -224,33 +225,33 @@ After the data has been transformed, the `common.py` script needs to be executed
     python common.py
     ```
     * Pay attention to any output or prompts in the terminal during its execution.
+    * If you experience any issues, please contact Armaan Shrivastav for assistance.
 
 ---
 
 ### 🌐 Step 7: View the Generated Graphs (Local Server)
 
-The `common.py` script generates a `graph` folder, which is then zipped. To view the contents (likely HTML files or similar visualizations), you'll need to unzip it and serve it using a simple Python web server.
+The `common.py` script directly generates a `graph` folder containing the visualization files. To view these (likely HTML files or similar), you'll need to serve them using a simple Python web server.
 
-1.  **Locate and Unzip the `graph` Folder:**
-    * After `common.py` runs, you should find a zipped file (e.g., `graph.zip` or similar) within your `Hurricane_Study` directory, or wherever `common.py` is configured to output it.
-    * **Unzip this file** in **any location** on your system where you want to serve the content from. This will create a folder named `graph` (or similar) containing HTML files, images, etc.
-    * **Remember the exact path** to this unzipped `graph` folder.
+1.  **Locate the `graph` Folder:**
+    * After `common.py` runs, you should find a new folder named `graph` within your `Hurricane_Study` directory.
+    * **Remember the exact path** to this `graph` folder.
 
-2.  **Navigate to the Unzipped `graph` Folder in Command Prompt:**
+2.  **Navigate to the `graph` Folder in Command Prompt:**
     * Open a **new** terminal or command prompt window.
-    * Use the `cd` command to go into the *unzipped `graph` folder*.
-        * **Example:** If you unzipped it to `C:\Users\YourUsername\Documents\MyGraphs`:
+    * Use the `cd` command to go into the *`graph` folder*.
+        * **Example:** If your `Hurricane_Study` project is at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study`, then the `graph` folder would likely be at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graph`.
             ```cmd
-            cd C:\Users\YourUsername\Documents\MyGraphs
+            cd C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graph
             ```
-        * **Example:** If you unzipped it to `~/Desktop/HurricaneGraphs`:
+        * **Example (Linux/macOS):** If your `Hurricane_Study` project is at `~/Desktop/MyHurricaneProjects/Hurricane_Study`, then the `graph` folder would likely be at `~/Desktop/MyHurricaneProjects/Hurricane_Study/graph`.
             ```bash
-            cd ~/Desktop/HurricaneGraphs
+            cd ~/Desktop/MyHurricaneProjects/Hurricane_Study/graph
             ```
     * **It is crucial that you are *inside* this `graph` folder** when you run the next command.
 
 3.  **Run the Python HTTP Server:**
-    * With your terminal/command prompt inside the unzipped `graph` folder, run the following command to start a simple local web server:
+    * With your terminal/command prompt inside the `graph` folder, run the following command to start a simple local web server:
         ```bash
         python -m http.server
         ```
