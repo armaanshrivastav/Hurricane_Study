@@ -176,7 +176,7 @@ pip install -r requirements.txt
 
 ---
 
-### 📊 Step 5: Download and Prepare Project Data
+**### 📊 Step 5: Download and Prepare Project Data**
 
 This project requires external data from Google Drive. Follow these steps to download it and place it correctly for processing.
 
