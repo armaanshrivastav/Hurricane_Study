@@ -209,6 +209,7 @@ This project requires external data from Google Drive. Follow these steps to dow
         ```bash
         python transformData.py
         ```
+        Verify whether the Processed Data folder was made under the MyHurricaneProject folder.
     * Monitor the terminal for any output or errors from the script.
     * If you experience any issues, please contact Armaan Shrivastav for assistance.
 
