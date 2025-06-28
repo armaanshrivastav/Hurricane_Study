@@ -56,7 +56,7 @@ def clean_filename(i, filename):
         return f'{i} {filename}'
     
 # Define the root folder containing the data
-data_folder = 'C:/Users/abhin/OneDrive/Documents/SRP 2024-25/ProcessedData'
+data_folder = '../ProcessedData'
 colors=['blue','purple','darkred','green','black','yellow','red','orange','pink','teal','lavender','maroon','turquoise','magenta','olive','cyan','indigo']
 
 # Custom colorscale approximating 'tab20'
