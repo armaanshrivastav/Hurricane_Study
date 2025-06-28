@@ -232,27 +232,27 @@ After the data has been transformed, the `common.py` script needs to be executed
 
 ### 🌐 Step 7: View the Generated Graphs (Local Server)
 
-The `common.py` script directly generates a `graph` folder containing the visualization files. To view these (likely HTML files or similar), you'll need to serve them using a simple Python web server.
+The `common.py` script directly generates a `graphs` folder containing the visualization files. To view these (likely HTML files or similar), you'll need to serve them using a simple Python web server.
 
-1.  **Locate the `graph` Folder:**
-    * After `common.py` runs, you should find a new folder named `graph` within your `Hurricane_Study` directory.
-    * **Remember the exact path** to this `graph` folder.
+1.  **Locate the `graphs` Folder:**
+    * After `common.py` runs, you should find a new folder named `graphs` within your `Hurricane_Study` directory.
+    * **Remember the exact path** to this `graphs` folder.
 
-2.  **Navigate to the `graph` Folder in Command Prompt:**
+2.  **Navigate to the `graphs` Folder in Command Prompt:**
     * Open a **new** terminal or command prompt window.
-    * Use the `cd` command to go into the *`graph` folder*.
-        * **Example:** If your `Hurricane_Study` project is at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study`, then the `graph` folder would likely be at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graph`.
+    * Use the `cd` command to go into the *`graphs` folder*.
+        * **Example:** If your `Hurricane_Study` project is at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study`, then the `graphs` folder would likely be at `C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graphs`.
             ```cmd
-            cd C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graph
+            cd C:\Users\YourUsername\MyHurricaneProjects\Hurricane_Study\graphs
             ```
-        * **Example (Linux/macOS):** If your `Hurricane_Study` project is at `~/Desktop/MyHurricaneProjects/Hurricane_Study`, then the `graph` folder would likely be at `~/Desktop/MyHurricaneProjects/Hurricane_Study/graph`.
+        * **Example (Linux/macOS):** If your `Hurricane_Study` project is at `~/Desktop/MyHurricaneProjects/Hurricane_Study`, then the `graphs` folder would likely be at `~/Desktop/MyHurricaneProjects/Hurricane_Study/graphs`.
             ```bash
-            cd ~/Desktop/MyHurricaneProjects/Hurricane_Study/graph
+            cd ~/Desktop/MyHurricaneProjects/Hurricane_Study/graphs
             ```
-    * **It is crucial that you are *inside* this `graph` folder** when you run the next command.
+    * **It is crucial that you are *inside* this `graphs` folder** when you run the next command.
 
 3.  **Run the Python HTTP Server:**
-    * With your terminal/command prompt inside the `graph` folder, run the following command to start a simple local web server:
+    * With your terminal/command prompt inside the `graphs` folder, run the following command to start a simple local web server:
         ```bash
         python -m http.server
         ```
@@ -273,5 +273,5 @@ The `common.py` script directly generates a `graph` folder containing the visual
 **Final Notes:**
 
 * Ensure all Python scripts (`transformData.py`, `common.py`) complete successfully without errors before proceeding to the next steps.
-* The `python -m http.server` command serves files from the directory where it's executed. Make sure you are in the *unzipped `graph` folder* for it to work correctly.
+* The `python -m http.server` command serves files from the directory where it's executed. Make sure you are in the *unzipped `graphs` folder* for it to work correctly.
 * To stop the local web server, go back to the terminal window where it's running and press `Ctrl + C` (Command + C on macOS).
