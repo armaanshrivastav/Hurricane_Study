@@ -83,7 +83,7 @@ def read_fixed_width_file_to_csv(input_file, start_time_ms, date, start_time, or
         print(f"An error occurred while processing '{input_file}': {e}")
 
 # Folder containing data files
-input_folder = "../HurricaneCompleteData"
+input_folder = "HurricaneCompleteData"
 output_folder = "../ProcessedData"
 
 # Recursive file scanning
