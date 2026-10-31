@@ -2,6 +2,12 @@
 
 This guide will walk you through the steps to set up and get started with the `Hurricane_Study` project by cloning its repository from GitHub.
 
+##Overview
+
+The Hurricane Visualization Tool is an interactive 3D visualization interface for exploring NOAA dropwindsonde measurements from multiple hurricanes. It allows users to examine six atmospheric measurements simultaneously through synchronized 3D plots, making it easier to compare conditions within hurricanes.
+
+The interface includes navigation between hurricane datasets, synchronized plot interactions, and PDF export.
+
 ## 🚀 Getting Started
 
 Follow these simple steps to get a local copy of the project up and running on your machine.
