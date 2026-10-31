@@ -2,17 +2,17 @@
 
 This guide will walk you through the steps to set up and get started with the `Hurricane_Study` project by cloning its repository from GitHub.
 
-##Overview
+## Overview
 
 The Hurricane Visualization Tool is an interactive 3D visualization interface for exploring NOAA dropwindsonde measurements from multiple hurricanes. It allows users to examine six atmospheric measurements simultaneously through synchronized 3D plots, making it easier to compare conditions within hurricanes.
 
 The interface includes navigation between hurricane datasets, synchronized plot interactions, and PDF export.
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these simple steps to get a local copy of the project up and running on your machine.
 
-### 🛠️ Step 0: Install Prerequisites (if not already installed)
+### Step 0: Install Prerequisites (if not already installed)
 
 Before you begin, ensure you have **Git** and **Python 3+** installed on your system.
 
@@ -71,7 +71,7 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
         sudo dnf install python3
         ```
 
-### 🔑 Step 0.5: Generate a GitHub Personal Access Token (PAT)
+### Step 0.5: Generate a GitHub Personal Access Token (PAT)
 
 **IMPORTANT:** GitHub no longer accepts account passwords for Git operations over HTTPS. You must use a Personal Access Token (PAT) instead, especially for private repositories or if you have 2-Factor Authentication (2FA) enabled.
 
@@ -93,20 +93,20 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
 
 ---
 
-### 📁 Step 1: Create a New Folder
+### Step 1: Create a New Folder
 
 First, you need to create a new, empty folder on your system where you want to store the project. This can be anywhere convenient for you (e.g., your Desktop, Documents, or a dedicated development directory).
 
 **Choose your operating system and follow the instructions:**
 
-#### 💻 Windows
+#### Windows
 
 1.  **Right-click** on your Desktop or in any desired location within File Explorer.
 2.  Select **New** from the context menu.
 3.  Click on **Folder**.
 4.  Type a name for your new folder (e.g., `MyHurricaneProjects`) and press `Enter`.
 
-#### 🐧 macOS / 🖥️ Linux
+#### macOS / Linux
 
 1.  Open your **Terminal** application.
 2.  Navigate to your desired location using the `cd` command (e.g., `cd Desktop/` or `cd Documents/`).
@@ -116,11 +116,11 @@ First, you need to create a new, empty folder on your system where you want to s
     ```
     (You can replace `MyHurricaneProjects` with your preferred folder name).
 
-### ⬇️ Step 2: Navigate to the New Folder and Clone the Repository using PAT in URL
+### Step 2: Navigate to the New Folder and Clone the Repository using PAT in URL
 
 Now that you have your empty folder, you will open your terminal or command prompt, navigate into this new folder, and then use `git clone` to download the project files. This time, you will embed your Personal Access Token directly in the URL.
 
-#### 💻 Windows / 🐧 macOS / 🖥️ Linux
+#### Windows / macOS / Linux
 
 1.  Open your **Terminal** or **Command Prompt** / **PowerShell**.
 2.  Use the `cd` command to navigate into the folder you created in Step 1.
@@ -141,7 +141,7 @@ Now that you have your empty folder, you will open your terminal or command prom
 
 ---
 
-### 🐍 Step 3: Create and Activate Python Virtual Environment
+### Step 3: Create and Activate Python Virtual Environment
 
 After cloning the repository, navigate into the newly created `Hurricane_Study` project directory. It's highly recommended to set up a dedicated Python virtual environment for this project to manage its dependencies in isolation.
 
@@ -173,7 +173,7 @@ After cloning the repository, navigate into the newly created `Hurricane_Study` 
 
 ---
 
-### 📦 Step 4: Install Python Dependencies
+### Step 4: Install Python Dependencies
 
 Now that you have cloned the project and activated its dedicated virtual environment, you are ready to install any project-specific Python dependencies. Look for a `requirements.txt` file within the `Hurricane_Study` directory. If it exists, you'll typically run:
 
@@ -182,7 +182,7 @@ pip install -r requirements.txt
 ```
 
 
-### 📊 Step 5: Download and Prepare Project Data
+### Step 5: Download and Prepare Project Data
 
 This project requires external data from Google Drive. Follow these steps to download it and place it correctly for processing.
 
@@ -221,7 +221,7 @@ This project requires external data from Google Drive. Follow these steps to dow
 
 ---
 
-### ▶️ Step 6: Run the Common Utilities Script (`common.py`)
+### Step 6: Run the Common Utilities Script (`common.py`)
 
 After the data has been transformed, the `common.py` script needs to be executed to set up common utilities or perform further essential processing for the project.
 
@@ -236,7 +236,7 @@ After the data has been transformed, the `common.py` script needs to be executed
 
 ---
 
-### 🌐 Step 7: View the Generated Graphs (Local Server)
+### Step 7: View the Generated Graphs (Local Server)
 
 The `common.py` script directly generates a `graphs` folder containing the visualization files. To view these (likely HTML files or similar), you'll need to serve them using a simple Python web server.
 
