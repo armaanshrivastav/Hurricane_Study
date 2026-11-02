@@ -186,10 +186,11 @@ pip install -r requirements.txt
 
 This project requires external data from Google Drive. Follow these steps to download it and place it correctly for processing.
 
-1.  **Download the Data from Google Drive:**
-    * Access the Google Drive link: https://drive.google.com/drive/folders/1-0gmto35N7WkK2AC-FP9s8Qhs_o4Aigc?usp=sharing
-    * Download the entire dataset. It will likely be a zipped file (e.g., `HurricaneData.zip`).
-    * Save this downloaded file to a temporary location on your computer (e.g., your Downloads folder).
+1. **Download the Data:**
+   * Access the Google Drive folder: https://drive.google.com/drive/folders/1-0gmto35N7WkK2AC-FP9s8Qhs_o4Aigc?usp=sharing
+   * Download the entire dataset. It will likely be a zipped file (e.g., `HurricaneData.zip`).
+   * If Google Drive is not accessible, use `HurricaneData.zip` from the repository’s root folder.
+   * Save or copy this file to a temporary location on your computer (e.g., your Downloads folder).
 
 2.  **Create the Data Folder:**
     * Navigate back to your `Hurricane_Study` project directory in your terminal (if you're not already there):
