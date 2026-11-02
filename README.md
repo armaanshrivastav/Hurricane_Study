@@ -73,7 +73,7 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
 
 ### Step 0.5: Generate a GitHub Personal Access Token (PAT)
 
-**IMPORTANT:** GitHub no longer accepts account passwords for Git operations over HTTPS. You must use a Personal Access Token (PAT) instead, especially for private repositories or if you have 2-Factor Authentication (2FA) enabled.
+**IMPORTANT:** You must use a Personal Access Token (PAT) instead, especially for private repositories or if you have 2-Factor Authentication (2FA) enabled.
 
 **SECURITY WARNING:** Embedding your PAT directly in the clone URL (as shown in Step 2) is generally **NOT RECOMMENDED** for long-term or shared use. It exposes your token in your shell history and potentially other logs, which is a security risk. For better security, consider using a Git credential helper (refer to Git documentation). This method is provided for specific scenarios where direct URL embedding is preferred despite the risks.
 
@@ -89,7 +89,7 @@ This project likely requires Python to run. Ensure you have Python version 3.x i
     * **Expiration:** Choose an expiration date. For security, it's recommended to set an expiration (e.g., 90 days, 1 year) rather than "No expiration".
     * **Scopes:** Select the necessary permissions (scopes). For cloning public and private repositories, select at least `repo` (which grants full control of private repositories). You might only need `public_repo` if you are sure you will *only* interact with public repositories.
     * Click **"Generate token"** at the bottom of the page.
-4.  **Copy the Token:** **Crucially, copy the generated token immediately!** This is the **ONLY TIME** you will see the token. Store it securely (e.g., in a password manager).
+4.  **Copy the Token:** **Copy the generated token immediately!** This is the **ONLY TIME** you will see the token. Store it securely (e.g., in a password manager).
 
 ---
 
