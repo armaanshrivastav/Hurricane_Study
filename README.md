@@ -189,7 +189,7 @@ This project requires external data from Google Drive. Follow these steps to dow
 1. **Download the Data:**
    * Access the Google Drive folder: https://drive.google.com/drive/folders/1-0gmto35N7WkK2AC-FP9s8Qhs_o4Aigc?usp=sharing
    * Download the entire dataset. It will likely be a zipped file (e.g., `HurricaneData.zip`).
-   * If Google Drive is not accessible, use `HurricaneData.zip` from the repository’s root folder.
+   * If Google Drive is not accessible, use `HurricaneData.zip` from the repository’s root folder as sample data.
    * Save or copy this file to a temporary location on your computer (e.g., your Downloads folder).
 
 2.  **Create the Data Folder:**
